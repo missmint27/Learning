@@ -128,13 +128,10 @@ def qsort(array,start,end):
 #2.
 def quicksort(array):
     if len(array) <= 1:
-        return array
-    # 左子数组
-    less = []
-    # 右子数组
-    greater = []
-    # 基准数
-    key = array.pop()
+        return array 
+    less = []# 左子数组    
+    greater = []# 右子数组
+    key = array.pop()# 基准数
     # 对原数组进行划分
     for x in array:
         if x < key:
