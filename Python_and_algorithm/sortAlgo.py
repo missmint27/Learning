@@ -141,7 +141,48 @@ def quicksort(array):
     # 递归调用
     return quicksort(less) + [key] + quicksort(greater)
 
-#7777777777777.堆排序
+#7777777777777.堆排序 (完全二叉树的结构) 使用Python里面的双向队列deque
+#大根堆：每个节点都比自己的孩子大   小根堆：每个节点都比自己的孩子小
+#使用大根堆并且升序排列的思想为：首先排列为大根堆，第一个元素最大，和最后一个交换（确定了最大的）
+#剩下的元素再次塑造大根堆，第一个元素又是最大，再放到倒数第二个位置
+#ki<=k2i and ki<=k2i+1       and 1<=i<=n//2   
+#ki>=k2i and ki>=k2i+1  
+       
+def heapSort(L): 
+	len_L = len(L)-1
+	first_sort_count = len_L//2
+	#把队列调整为大根堆
+	#first_sort_count-i是有孩子的节点
+	for i in range(first_sort_count):
+		heap_adjust(L,first_sort_count-i,len_L)
+	#把栈顶元素与堆末尾元素交换，并且将剩下元素调整为大根堆
+	for i in range(len_L-1):
+		L = swap_param(L, 1, len_L - i)
+		heap_adjust(L, 1, len_L - i - 1)
+	return [L[i] for i in range(1, len(L))]
+#调整大根堆，其实就是按照从右往左，从下到上的顺序，把每颗小树调整为一个大根堆
+#把每个子树的根节点和较大的子节点进行值交换。而且如果在左子树 依然是根节点的情况下继续进行调整。
+def heap_adjust(L,start,end):
+	temp = L[start]
+	i = start
+	j = 2 * i
+	while j <= end:
+		if (j < end) and (L[j] < L[j + 1]):
+			j += 1
+		if temp < L[j]:
+			L[i] = L[j]
+			i = j
+			j = 2 * i
+		else:
+			break
+	L[i] = temp
+def swap_param(L,i,j):
+	L[i],L[j] = L[j], L[i]
+	return L
+
+
+#888888888.计数排序
+
 	
 if __name__ == '__main__':
 	array = [6,8,4,3,9,2,10,-1,5]
@@ -153,14 +194,23 @@ if __name__ == '__main__':
 
 	#shellSort(array)
 
-	#result = mergeSort(array)
-	#print("mergeSort:",result)
-
-	#quickSort(array)
-	#print("quickSort:",array) #的原数组进行原地排序
-
-	#result = quicksort(array)
-	#print("quicksort2:",result)
+	'''
+	result = mergeSort(array)
+	print("mergeSort:",result)
+	'''
+	'''
+	quickSort(array)
+	print("quickSort:",array) #的原数组进行原地排序
+	'''
+	'''
+	result = quicksort(array)
+	print("quicksort2:",result)
+	'''
+	'''from collections import deque
+	L = deque([50, 16, 30, 10, 60,  90,  2, 80, 70])
+	L.appendleft(0)
+	print(heapSort(L))
+	'''
 
 
 
