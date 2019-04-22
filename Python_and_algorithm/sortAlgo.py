@@ -202,10 +202,29 @@ def countingSort(array):
 		c[i] -= 1        #C中的计数-1
 	print(o)
 
+#999999.桶排序：
+#把数组a划分为n个大小相同子区间（桶），每个子区间各自排序，最后合并。
+#桶排序要求数据的分布必须均匀，不然可能会失效。
+#计数排序是桶排序的一种特殊情况，可以把计数排序当成每个桶里只有一个元素的情况
+'''
+设置一个定量的数组当作空桶；
+遍历输入数据，并且把数据一个一个放到对应的桶里去；
+对每个不是空的桶进行排序；
+从不是空的桶里把排好序的数据拼接起来
+'''
+def bucketSort(array):
+	o = []
+	buckets = [0] * (max(array)-min(array)+1) #初始化桶
+	for i in array:
+		buckets[i-min(array)] += 1  # 遍历数组a，在桶的相应位置累加值
+	for i in range(len(buckets)):
+		if buckets[i] != 0:
+			o += [i + min(array)] * buckets[i]
+	print(o)
 
 	
 if __name__ == '__main__':
-	array = [6,8,4,3,9,2,10,-1,5]
+	#array = [6,8,4,3,9,2,10,-1,5]
 	#bubbleSort(array)
 
 	#selectionSort(array)
@@ -232,7 +251,8 @@ if __name__ == '__main__':
 	print(heapSort(L))
 	'''
 	array = [6,8,4,3,9,2,10,2,3,4,2,2,3,6,5]
-	countingSort(array)
+	#countingSort(array)
+	bucketSort(array)
 
 
 
