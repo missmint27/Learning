@@ -181,7 +181,27 @@ def swap_param(L,i,j):
 	return L
 
 
-#888888888.计数排序
+#888888888.计数排序：只能排序非负整数  不是基于比较的排序算法
+'''
+找出待排序的数组中最大和最小的元素；
+统计数组中每个值为i的元素出现的次数，存入数组C的第i项；
+对所有的计数累加（从C中的第一个元素开始，每一项和前一项相加）；
+反向填充目标数组：将每个元素i放在新数组的第C(i)项，每放一个元素就将C(i)减去1。
+'''
+def countingSort(array):
+	k = max(array)
+	n = len(array)  # 计算a序列的长度
+	o = [0 for i in range(n)]  # 设置输出序列并初始化为0
+	c = [0 for i in range(k + 1)]  # 设置计数序列并初始化为0，
+	for i in array:
+		c[i] += 1        #统计每一个元素出现的次数
+	for i in range(1, len(c)):
+		c[i] += c[i-1]   #计算要放的位置：统计每一个元素等于或者小于它的元素个数, 从第一个(不是第0个开始)
+	for i in array:      #遍历每数组A中每一个数, 放在相应的数组B中的位置
+		o[c[i] - 1] = i  #C[A[i]]表示等于或者小于元素的个数, 在B数组中的下标应该-1
+		c[i] -= 1        #C中的计数-1
+	print(o)
+
 
 	
 if __name__ == '__main__':
@@ -211,6 +231,8 @@ if __name__ == '__main__':
 	L.appendleft(0)
 	print(heapSort(L))
 	'''
+	array = [6,8,4,3,9,2,10,2,3,4,2,2,3,6,5]
+	countingSort(array)
 
 
 
