@@ -222,6 +222,16 @@ def bucketSort(array):
 			o += [i + min(array)] * buckets[i]
 	print(o)
 
+#10.基数排序：将待排序数据拆分成多个关键字进行排序，也就是说，基数排序的实质是多关键字排序
+def radixSort(array, d=3): # 默认三位数，如果是四位数，则d=4，以此类推
+    for i in range(d):  # d轮排序
+        s = [[] for k in range(10)]  # 因每一位数字都是0~9，建10个桶
+        for j in array:
+            s[int(j / (10 ** i)) % 10].append(j)  
+        re = [a for b in s for a in b] #展开二维数组
+    print(re)
+
+
 	
 if __name__ == '__main__':
 	#array = [6,8,4,3,9,2,10,-1,5]
